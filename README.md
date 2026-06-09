@@ -1,90 +1,116 @@
-UE08
+# Ökosystem – Der Lauf der Natur 🌿🦁
 
-author = "8766674, Fehr, 7791598, Schidlauskat"
+Dieses Projekt implementiert ein **simulationsbasiertes Ökosystem** mithilfe objektorientierter Programmierung (OOP) in Python. Die Simulation bildet ein dynamisches Habitat ab, in dem Pflanzen und Tiere über diskrete Runden hinweg wachsen, interagieren, sich reproduzieren und sterben.
 
-Dieses Projekt implementiert ein simulationsbasiertes Ökosystem mithilfe objektorientierter Programmierung in Python. Das Ökosystem besteht aus einem Habitat, Pflanzen und Tieren, die in diskreten Runden interagieren.
+Das Projekt entstand als Umsetzung der Aufgabenstellung *„Ökosystem – der Lauf der Natur“* im Rahmen des Moduls **Einführung in die Praktische Informatik (EPR)** im Wintersemester 2025/26 (Übungsblatt `UE08`).
 
-##Ziel und Anforderungen
+---
 
-Ziel des Projekts ist die Umsetzung der Aufgabenstellung „Ökosystem – der Lauf der Natur“ aus EPR WiSe 2025/26.
+## 👥 Autoren
+* **Projektmitglieder:** 8766674 (Fehr), 7791598 (Schidlauskat)
 
-Umgesetzt wurden:
+---
 
-Simulation in diskreten Runden
-mindestens 3 Pflanzenarten
-mindestens 3 Tierarten (Herbivore, Carnivore, Omnivore)
-begrenzter Platz im Habitat
-Wachstum, Fressen, Reproduktion, Tod
-zufallsbasierte Ereignisse
-Konsolenbasiertes UI
-##Programmstruktur
+## 🎯 Ziel & Anforderungen
 
-Zentrale Klassen:
+Das primäre Ziel ist die realitätsnahe Modellierung biologischer Wechselwirkungen in einem geschlossenen Raum unter Berücksichtigung von Ressourcenknappheit und Umweltfaktoren.
 
-ConsoleUI Steuert Benutzereingaben und den Ablauf der Simulation
+### Umgesetzte Features:
+- [x] **Diskrete Rundensimulation:** Zeitabhängige Steuerung aller Lebenszyklen.
+- [x] **Artenvielfalt:** Mindestens 3 Pflanzenarten und 3 Tierarten (Herbivore, Carnivore, Omnivore).
+- [x] **Räumliche Begrenzung:** Das Habitat besitzt eine limitierte Kapazität (begrenzter Platz).
+- [x] **Biologische Kernprozesse:** Wachstum, Nahrungsaufnahme (Fressen/Jagen), Reproduktion und natürlicher oder unnatürlicher Tod.
+- [x] **Stochastische Dynamik:** Zufallsbasierte Ereignisse beeinflussen das Überleben.
+- [x] **Interaktives UI:** Konsolenbasierte Benutzeroberfläche zur Steuerung und Überwachung.
 
-Habitat Zentraler Orchestrator des Systems. Verwaltet alle Lebewesen, den verfügbaren Platz, die Jahreszeiten und den Rundenablauf
+---
 
-LivingBeing (abstrakt) Basisklasse für alle Lebewesen
+## 🏗️ Programmstruktur & Klassenhierarchie
 
-Plant (abstrakt) Oberklasse aller Pflanzenarten. Spezialisierungen: SummerPlant, WinterPlant, PoisonPlant
+Das Projekt setzt konsequent auf Vererbung und Polymorphie. Die Architektur gliedert sich in folgende zentrale Komponenten:
 
-Animal (abstrakt) Oberklasse aller Tiere. Spezialisierungen: Herbivore, Carnivore, Omnivore
+### 📱 Benutzeroberfläche & Orchestrierung
+* **`ConsoleUI`**: Steuert die Benutzereingaben, initialisiert die Startkonfiguration und verwaltet den interaktiven Ablauf der Simulation.
+* **`Habitat`**: Der zentrale Koordinator des Systems. Verwaltet alle Lebewesen, überwacht den verfügbaren Platz, steuert den Wechsel der Jahreszeiten und triggert den Rundenablauf.
 
-##Regeln des Ökosystems
+### 🧬 Vererbungshierarchie der Lebewesen
 
-Allgemeine Regeln:
+              [ LivingBeing (abstrakt) ]
+                         │
+           ┌─────────────┴─────────────┐
+           ▼                           ▼
+    [ Plant (abstrakt) ]       [ Animal (abstrakt) ]
+           │                           │
+           ├─► SummerPlant             ├─► Herbivore (Pflanzenfresser)
+           ├─► WinterPlant             ├─► Carnivore (Fleischfresser)
+           └─► PoisonPlant             └─► Omnivore  (Allesfresser)
 
-Die Simulation läuft in diskreten Runden
-In jeder Runde altern alle Lebewesen
-Tote Lebewesen werden am Ende der Runde entfernt
-Pflanzen:
+- **`LivingBeing`**: Abstrakte Basisklasse für alle Entitäten mit grundlegenden Eigenschaften wie Alter und Lebensstatus.
+- **`Plant`**: Abstrahierende Oberklasse für die Flora. Spezialisiert in saisonale Gewächse und toxische Verteidigungspflanzen.
+- **`Animal`**: Abstrahierende Oberklasse für die Fauna, aufgeteilt nach Ernährungs- und Jagdtypen.
 
-Pflanzen besitzen eine minimale und maximale Größe
-Das Wachstum ist abhängig von Pflanzenart und Jahreszeit
-Wird die minimale Größe unterschritten, stirbt die Pflanze
-Tiere:
+---
 
-Tiere verlieren pro Runde Energie
-Tiere müssen fressen, um zu überleben
-Reproduktion ist alters- und energieabhängig
-Fleischfresser und Allesfresser können jagen
-##Spezialregeln
+## 📜 Regelwerk des Ökosystems
 
-Wenn ein Tier eine PoisonPlant isst, verliert das Tier mit einer Wahrscheinlichkeit von 30% Energie, statt welche zu gewinnen
+### Allgemeine Regeln
+* **Altern:** Jedes Lebewesen altert pro simulierter Runde um den Wert `1`.
+* **Bereinigung:** Am Ende jeder Runde werden verstorbene oder gefressene Entitäten vollständig aus dem Habitat entfernt.
 
-Carnivoren halten im Winter Winterschlaf, sofern ihre Energie ≥ 3 ist
+### 🌱 Pflanzen-Mechaniken
+* **Größenrestriktion:** Pflanzen besitzen eine minimale und eine maximale Größe.
+* **Saisonales Wachstum:** Die Wachstumsrate ist direkt an die Pflanzenart und die aktuelle Jahreszeit gekoppelt.
+* **Kritische Untergrenze:** Fällt eine Pflanze durch äußere Einflüsse unter ihre minimale Größe, stirbt sie sofort.
+* **Platzmangel:** Pflanzen können **nur wachsen**, wenn im Habitat noch freier Platz vorhanden ist.
 
-Pflanzen können nur wachsen, wenn im Habitat noch freier Platz vorhanden ist
+### 🐺 Tier-Mechaniken
+* **Metabolismus:** Tiere verlieren pro Runde kontinuierlich Energie (Stoffwechsel).
+* **Nahrungsaufnahme:** Um zu überleben, müssen Tiere fressen. Fleisch- und Allesfresser können aktiv Jagd auf andere Tiere machen.
+* **Fortpflanzung:** Die Reproduktion erfolgt autonom, ist jedoch streng an ein Mindestalter und ein ausreichendes Energieniveau gebunden.
+* **Energetischer Tod:** Fällt die Energie eines Tieres auf `≤ 0`, stirbt es unverzüglich.
 
-Der Jagderfolg von Carnivoren ist jahreszeitenabhängig
+---
 
-Tiere sterben sofort, wenn ihre Energie ≤ 0 fällt
+## ⚡ Spezialregeln & Zufallseinflüsse
 
-##Zufallseinflüsse
+Um die Simulation dynamisch und unvorhersehbar zu gestalten, wurden folgende Sonderregeln implementiert:
 
-Jagderfolg von Tieren
+* **Das Giftpflanzen-Risiko (`PoisonPlant`):** Frisst ein Tier eine Giftpflanze, besteht eine **30%-ige Wahrscheinlichkeit**, dass das Tier Energie *verliert* statt gewinnt.
+* **Winterschlaf:** Carnivoren halten im Winter Winterschlaf, sofern sie im Herbst genügend Reserven gesammelt haben (Energie `≥ 3`).
+* **Saisonale Jagd:** Der Jagderfolg von Fleischfressern ist stark von der aktuellen Jahreszeit abhängig.
+* **Stochastische Faktoren:** - Erfolg einer Jagd
+  - Intoxikation durch Giftpflanzen
+  - Wahrscheinlichkeit der Reproduktion von Flora und Fauna
 
-Vergiftung durch PoisonPlant
+---
 
-Reproduktion von Pflanzen und Tieren
+## 💻 Benutzerführung (UI)
 
-##UI
+Beim Programmstart wird der Nutzer interaktiv durch die Konfiguration geleitet:
+1. Definition der **Habitatgröße** (maximaler Platz).
+2. Festlegung der **Startanzahl** der jeweiligen Lebewesen.
 
-Nach dem Start wird der Benutzer über die Konsole nach der Startkonfiguration gefragt (Habitatgröße, Anzahl der Lebewesen)
+Nach der Initialisierung wechselt die Anwendung in den Steuerungsmodus. Der Nutzer hat folgende Optionen:
+* **`1` Eine einzelne Runde simulieren** – Führt genau einen Zeitschritt aus.
+* **`2` Mehrere Runden simulieren** – Lässt das Ökosystem über einen längeren Zeitraum autark laufen.
+* **`3` Simulation pausieren** – Hält den Durchlauf an, um den aktuellen Zustand zu analysieren.
 
-Nach der Initialisierung kann:
+**Ausgabe-Dashboard nach jeder Runde:**
+Nach jedem Schritt gibt die Konsole einen detaillierten Statusbericht aus:
+* Aktuelle Jahreszeit (`season`)
+* Anzahl der lebenden Tiere (aufgeschlüsselt)
+* Anzahl der vorhandenen Pflanzen
+* Log-Protokoll der aufgetretenen Ereignisse (Tode, Geburten, Jagderfolge)
 
-eine einzelne Runde simuliert werden
-mehrere Runden simuliert werden
-die Simulation pausiert werden
-Die Ausgabe zeigt nach jeder Runde den aktuellen Zustand des Ökosystems (season, Anzahl Tier, Anzahl Pflanzen, Ereignisse)
+---
 
-Voraussetzungen:
+## ⚙️ Voraussetzungen & Annahmen
 
-Python 3.10+
-##Annahmen
+### Technische Voraussetzungen
+* **Runtime:** Python 3.10 oder neuer.
+* **Abhängigkeiten:** Ausschließlich Python-Standardbibliothek (keine externen Pakete benötigt).
 
-Tod durch Altersschwäche wird indirekt über den Energieverlust modelliert
-Alle Lebewesen altern pro Runde um 1
-Jahreszeiten wechseln alle zwei Runden (Start bei Frühling, dann Sommer, Herbst, Winter)
+### Modell-Annahmen
+* **Lebensdauer:** Ein expliziter Tod durch Altersschwäche existiert nicht; er wird indirekt über den progressiven Energieverlust im Alter simuliert.
+* **Jahreszeitenzyklus:** Die Jahreszeiten wechseln zyklisch **alle zwei Runden**. Der Ablauf startet im Frühling:
+  `Frühling -> Sommer -> Herbst -> Winter`
