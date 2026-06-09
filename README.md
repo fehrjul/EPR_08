@@ -1,17 +1,17 @@
-# Ökosystem – Der Lauf der Natur 🌿🦁
+# Ökosystem Simulation
 
 Dieses Projekt implementiert ein **simulationsbasiertes Ökosystem** mithilfe objektorientierter Programmierung (OOP) in Python. Die Simulation bildet ein dynamisches Habitat ab, in dem Pflanzen und Tiere über diskrete Runden hinweg wachsen, interagieren, sich reproduzieren und sterben.
 
-Das Projekt entstand als Umsetzung der Aufgabenstellung *„Ökosystem – der Lauf der Natur“* im Rahmen des Moduls **Einführung in die Praktische Informatik (EPR)** im Wintersemester 2025/26 (Übungsblatt `UE08`).
+Das Projekt entstand als Umsetzung einer Ökosystem Simulation im Rahmen des Moduls **Einführung in die Praktische Informatik (EPR)** im Wintersemester 2025/26 (Übungsblatt `UE08`).
 
 ---
 
-## 👥 Autoren
+## Autoren
 * **Projektmitglieder:** 8766674 (Fehr), 7791598 (Schidlauskat)
 
 ---
 
-## 🎯 Ziel & Anforderungen
+## Ziel & Anforderungen
 
 Das primäre Ziel ist die realitätsnahe Modellierung biologischer Wechselwirkungen in einem geschlossenen Raum unter Berücksichtigung von Ressourcenknappheit und Umweltfaktoren.
 
@@ -25,15 +25,15 @@ Das primäre Ziel ist die realitätsnahe Modellierung biologischer Wechselwirkun
 
 ---
 
-## 🏗️ Programmstruktur & Klassenhierarchie
+## Programmstruktur & Klassenhierarchie
 
 Das Projekt setzt konsequent auf Vererbung und Polymorphie. Die Architektur gliedert sich in folgende zentrale Komponenten:
 
-### 📱 Benutzeroberfläche & Orchestrierung
+### Benutzeroberfläche & Orchestrierung
 * **`ConsoleUI`**: Steuert die Benutzereingaben, initialisiert die Startkonfiguration und verwaltet den interaktiven Ablauf der Simulation.
 * **`Habitat`**: Der zentrale Koordinator des Systems. Verwaltet alle Lebewesen, überwacht den verfügbaren Platz, steuert den Wechsel der Jahreszeiten und triggert den Rundenablauf.
 
-### 🧬 Vererbungshierarchie der Lebewesen
+### Vererbungshierarchie der Lebewesen
 
               [ LivingBeing (abstrakt) ]
                          │
@@ -51,19 +51,19 @@ Das Projekt setzt konsequent auf Vererbung und Polymorphie. Die Architektur glie
 
 ---
 
-## 📜 Regelwerk des Ökosystems
+## Regelwerk des Ökosystems
 
 ### Allgemeine Regeln
 * **Altern:** Jedes Lebewesen altert pro simulierter Runde um den Wert `1`.
 * **Bereinigung:** Am Ende jeder Runde werden verstorbene oder gefressene Entitäten vollständig aus dem Habitat entfernt.
 
-### 🌱 Pflanzen-Mechaniken
+### Pflanzen-Mechaniken
 * **Größenrestriktion:** Pflanzen besitzen eine minimale und eine maximale Größe.
 * **Saisonales Wachstum:** Die Wachstumsrate ist direkt an die Pflanzenart und die aktuelle Jahreszeit gekoppelt.
 * **Kritische Untergrenze:** Fällt eine Pflanze durch äußere Einflüsse unter ihre minimale Größe, stirbt sie sofort.
 * **Platzmangel:** Pflanzen können **nur wachsen**, wenn im Habitat noch freier Platz vorhanden ist.
 
-### 🐺 Tier-Mechaniken
+### Tier-Mechaniken
 * **Metabolismus:** Tiere verlieren pro Runde kontinuierlich Energie (Stoffwechsel).
 * **Nahrungsaufnahme:** Um zu überleben, müssen Tiere fressen. Fleisch- und Allesfresser können aktiv Jagd auf andere Tiere machen.
 * **Fortpflanzung:** Die Reproduktion erfolgt autonom, ist jedoch streng an ein Mindestalter und ein ausreichendes Energieniveau gebunden.
@@ -71,7 +71,7 @@ Das Projekt setzt konsequent auf Vererbung und Polymorphie. Die Architektur glie
 
 ---
 
-## ⚡ Spezialregeln & Zufallseinflüsse
+## Spezialregeln & Zufallseinflüsse
 
 Um die Simulation dynamisch und unvorhersehbar zu gestalten, wurden folgende Sonderregeln implementiert:
 
@@ -84,7 +84,7 @@ Um die Simulation dynamisch und unvorhersehbar zu gestalten, wurden folgende Son
 
 ---
 
-## 💻 Benutzerführung (UI)
+## Benutzerführung (UI)
 
 Beim Programmstart wird der Nutzer interaktiv durch die Konfiguration geleitet:
 1. Definition der **Habitatgröße** (maximaler Platz).
@@ -104,7 +104,7 @@ Nach jedem Schritt gibt die Konsole einen detaillierten Statusbericht aus:
 
 ---
 
-## ⚙️ Voraussetzungen & Annahmen
+## Voraussetzungen & Annahmen
 
 ### Technische Voraussetzungen
 * **Runtime:** Python 3.10 oder neuer.
